@@ -15,7 +15,7 @@
     function App() {
         let [counter, setCounter] = React.useState(0);
         const onClick = () => {
-            setCounter(counter+1);
+            setCounter((current) => current + 1);//current = state의 현재값
         };
         return (
         <div>
