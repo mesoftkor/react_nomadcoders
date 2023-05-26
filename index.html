@@ -7,117 +7,33 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 
-    function MinutesToHours(){   
-        const [inverted, setInverted] = React.useState(false);
-        const [amount, setAmount] = React.useState();
-        const onChange = (event) =>{
-            setAmount(event.target.value);
-        }
-        const reset = () => {setAmount(0);}
-        const onFlip = () => {
-            reset();
-            setInverted(current => !current);
-        }
-        return (
-        <div>
-            <h4>You want to convert {amount}</h4>
-            <div>
-                <label for="minutes">Minutes</label>
-                <input 
-                    value={inverted ? amount * 60 : amount} 
-                    id="minutes"
-                    placeholder = "Minutes" 
-                    type="number" 
-                    onChange={onChange} 
-                    disabled={inverted}
-                />
-            </div>
-            <div>
-                <label for="hours">Hours</label>
-                <input 
-                    value={inverted ? amount : Math.round(amount/60)} 
-                    id="hours" 
-                    placeholder = "Hours" 
-                    type="number" 
-                    onChange={onChange} 
-                    disabled={!inverted}
-                />
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={onFlip}>{inverted ? "Turn back":"Invert"}</button>
-        </div>);
-    }
-    
-    function KmToMiles(){
-        const [convertValue, setConvertValue] = React.useState();
-        const [inverted, setInverted] = React.useState(false);
-
-        const onChange = (event) => {
-            setConvertValue(event.target.value);
-            console.log(convertValue);
-        }
-        const chagneInverted = () => {
-            reset();
-            setInverted(!inverted);
-            console.log(inverted);
-        }
-        const onFlip = () => {
-            reset();
-            setInverted(current => !current);
-        }
-        const reset = () => {setConvertValue(0);}
-        return (
-        <div>
-            <h3>KM 2 M</h3>
-            <h1>You want to convert : {convertValue}</h1>
-            <div>
-                <label for="km">KM</label>
-                <input 
-                id = "km"
-                placeholder="KM"
-                type="number"
-                value = {inverted ? Math.round(convertValue*1.609344) : convertValue}
-                onChange = {onChange}
-                disabled = {inverted}
-                />
-            </div>
-            <div>
-                <label for="mile">mile</label>
-                <input 
-                id = "mile"
-                placeholder="mile"
-                type="number"
-                value = {!inverted ? Math.round(convertValue*0.621371) : convertValue}
-                onChange = {onChange}
-                disabled = {!inverted}
-                />
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={chagneInverted}>{!inverted?"Invert":"Turn back"}</button>
-        </div>
-        );
-    }
-    
     const root =document.getElementById("root");
+
+//  function Btn(props)
+//    props.banana 로 사용 가능 하나 object이므로 props = {}로 shotcut 가능
+    function Btn({banana, x, y,big}){
+        return (
+            <button style={{
+            backgroundColor: "tomato",
+            color:"white",
+            padding:"10px 20px",
+            border : 0,
+            borderRadius: 10,
+            fontSize: big ? 18: 12,
+        }}>{banana}</button>);
+    }
+
     function App() {
-        const [index, setIndex] = React.useState("-1")
-        const onSelect = (event) => {
-            setIndex(event.target.value);
-        }
+        const aaa = {b:111, c:222};
         return (
         <div>
-            <h1>Super Converter</h1>
-            <select value={index} onChange={onSelect}>
-                <option value="-1">Select Your units</option>
-                <option value="0">Minutes & Hours</option>
-                <option value="1">Km & Miles</option>
-            </select>
-            <hr/>
-            {index === "-1" ? "Please select your units":null}
-            {index === "0" ? <MinutesToHours/>:null}
-            {index === "1" ? <KmToMiles/>:null}
+            <input type="text" />
+            <Btn banana="Save Changes" big={true} x={aaa}/>&nbsp;
+            <Btn banana="Continue" big={false} y="777"/>
         </div>);
     };
+    //            //Btn은 function이니까 like.. Btn({banana : "Save Changes"})
+
     ReactDOM.render(<App />, root);
 </script>
 </html>
